@@ -1,4 +1,5 @@
 import base64
+import ddddocr
 import json
 import sys
 import requests
@@ -54,16 +55,30 @@ class DailyFDCaptcha:
         self.info = info_callback
     def __call__(self):
         img = getCaptchaData(self.zlapp)
-        result = base64_api(self.uname,self.pwd,img,self.typeid)
-        print(result)
-        if result['success']:
-            self.id = result["data"]["id"]
-            return result["data"]["result"]
-        else:
-            self.info(result["message"])
-    def reportError(self):
-        if self.id != 0:
-            self.info(reportError(self.id))
+        with open('1.png', 'wb') as f:
+            f.write(img.content)
+
+        ocr = ddddocr.DdddOcr()
+        with open('1.png', 'rb') as f:
+            img_bytes = f.read()
+        result = ocr.classification(img_bytes)
+
+    #print(type(res))
+    #print(res.upper())
+
+
+
+    #     result = base64_api(self.uname,self.pwd,img,self.typeid)
+        
+    #     print(result)
+    #     if result['success']:
+    #         self.id = result["data"]["id"]
+    #         return result["data"]["result"]
+    #     else:
+    #         self.info(result["message"])
+    # def reportError(self):
+    #     if self.id != 0:
+    #         self.info(reportError(self.id))
     
 if __name__ == "__main__":
     def base64_api(uname, pwd, img, typeid):
