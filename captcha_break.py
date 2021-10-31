@@ -63,6 +63,7 @@ class DailyFDCaptcha:
             img_bytes = f.read()
         result = ocr.classification(img_bytes)
         result.upper()
+        print("test")
         return result
 
 
