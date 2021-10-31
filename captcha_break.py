@@ -54,7 +54,7 @@ class DailyFDCaptcha:
         self.pwd = pwd
         self.info = info_callback
     def __call__(self):
-        img = getCaptchaData(self.zlapp)
+        img = requests.get("https://zlapp.fudan.edu.cn/backend/default/code")
         with open('1.png', 'wb') as f:
             f.write(img.content)
 
@@ -63,6 +63,7 @@ class DailyFDCaptcha:
             img_bytes = f.read()
         result = ocr.classification(img_bytes)
         return result
+
 
     #print(type(res))
     #print(res.upper())
