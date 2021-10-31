@@ -54,7 +54,7 @@ class DailyFDCaptcha:
         self.pwd = pwd
         self.info = info_callback
     def __call__(self):
-        img = requests.get("https://zlapp.fudan.edu.cn/backend/default/code")
+        img = getCaptchaData(self.zlapp)
         with open('1.png', 'wb') as f:
             f.write(img.content)
 
