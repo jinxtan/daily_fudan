@@ -56,7 +56,7 @@ class DailyFDCaptcha:
     def __call__(self):
         img = getCaptchaData(self.zlapp)
         with open('1.png', 'wb') as f:
-            f.write(img.content)
+            f.write(img)
 
         ocr = ddddocr.DdddOcr()
         with open('1.png', 'rb') as f:
